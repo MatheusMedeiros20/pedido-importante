@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido Especial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffc0cb">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #fff;
+      transition: background-color 0.5s;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    #sim {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #nao {
+      background-color: #f44336;
+      color: white;
+      position: absolute;
+    }
+    #mensagem {
+      font-size: 1.5em;
+      margin-top: 40px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quer casar comigo?</h1>
+  <button id="sim">Sim</button>
+  <button id="nao">Não</button>
+  <div id="mensagem">Resposta certa, vamos comer um pastel e tomar caldo de cana 💖</div>
+
+  <script>
+    const nao = document.getElementById('nao');
+    const sim = document.getElementById('sim');
+    const msg = document.getElementById('mensagem');
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      nao.style.left = x + 'px';
+      nao.style.top = y + 'px';
+    }
+
+    nao.addEventListener('mouseover', moveButton);
+    nao.addEventListener('click', moveButton);
+
+    sim.addEventListener('click', () => {
+      document.body.style.backgroundColor = 'pink';
+      msg.style.display = 'block';
+      sim.style.display = 'none';
+      nao.style.display = 'none';
+    });
+
+    moveButton();
+
+    // PWA registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado!'));
+    }
+  </script>
+</body>
+</html>
